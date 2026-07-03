@@ -460,10 +460,6 @@ def main():
     log.info("=== weekly_review.py complete ===")
 
 
-if __name__ == "__main__":
-    main()
-
-
 # ── TRADE LOG + THESIS LOADERS ────────────────────────────────────────────────
 
 TRADE_LOG_PATH = BASE / "01-Trading" / "trade_log.json"
@@ -511,3 +507,8 @@ def load_weekly_thesis():
     except Exception as e:
         log.warning(f"Thesis load failed: {e}")
         return None
+
+
+
+if __name__ == "__main__":
+    main()

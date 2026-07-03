@@ -256,6 +256,7 @@ def extract_pulse(ctx: dict) -> dict:
         "oil":  core.get("Oil", {}),
         "fear_greed": fg, "macro": macro,
         "posture": ctx.get("daily_posture", ""),
+        "directional_bias": ctx.get("directional_bias", {}),
     }
 
 def compute_macro_risk_block(pulse: dict) -> dict:
@@ -409,6 +410,19 @@ def build_actives_prompt(pulse: dict, levels: dict) -> str:
     btc = pulse["btc"]; eth = pulse["eth"]; sol = pulse["sol"]; tsla = pulse["tsla"]
     fg = pulse["fear_greed"]
     macro_ctx = compute_macro_risk_block(pulse)["actives"]
+    _db = pulse.get("directional_bias", {}) or {}
+    _prim = _db.get("primary")
+    if _prim:
+        bias_block = (
+            "\nBRIEF DIRECTIONAL READ (from today's market brief — treat as a prior):\n"
+            f"  72H bias: {_prim['ticker']} {_prim['direction']} | posture: {_db.get('posture','?')} | setup: {_db.get('setup_signal','?')}\n"
+            "  Align active setups with this read. If a setup contradicts it, state the structural reason in the rationale — do not silently invert the brief's bias."
+        )
+    else:
+        bias_block = (
+            f"\nBRIEF DIRECTIONAL READ: no single-ticker 72H bias today | posture: {_db.get('posture','?')} | setup: {_db.get('setup_signal','?')}\n"
+            "  No forced alignment — derive setups from structure."
+        )
 
     def fmt(v):
         try: return f"{float(v):,.2f}"
@@ -427,6 +441,8 @@ KEY LEVELS (60-day rolling, 5-day swing stops):
 
 TA SNAPSHOT:
 {ta_snapshot_block(actives_levels)}
+
+{bias_block}
 
 Day-trade lean default. BTC, SOL, TSLA are REQUIRED — include all three.
 ETH is CONDITIONAL — include only if a clean setup is present, otherwise omit.

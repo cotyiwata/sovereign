@@ -97,99 +97,7 @@ GLOBAL CONSTRAINTS:
 - No filler sign-offs or closing remarks
 - The brief ends after PORTFOLIO WATCH. Hard stop.
 
-SIGNAL FEED FORMAT:
-For each category you will see headlines followed by "→ SO WHAT:"
-Write ONLY the SO WHAT response. Max 2 sentences. Directional. No hedging. No restating headlines.
-
-PULSE: 4-5 sentences. Integrate BTC, SPY, Gold/DXY, Fear & Greed into one coherent market read. Include specific price action observations, what is leading vs lagging, and the net read for positioning.
-REGIME: 4-5 sentences. Macro regime, what drives it, what would change it, and how it directly affects your crypto and AI equity universe.
-NEWS: 4-5 items from the signal feed. Use exactly this format — no deviations:
-
-FEATURED | [CATEGORY] | [headline, 10 words max]
-[What happened, 2 sentences.] [Why it matters for crypto/AI equity traders, 1 sentence.]
-SIGNAL: [one sentence — direct relevance to BTC, AI semis, or AI energy thesis]
-
-QUICK | [CATEGORY] | [headline, 8 words max]
-[1-2 sentences. Fact + market relevance. No hedging.]
-
-Categories: CRYPTO, MACRO, AI, ENERGY
-Pick the single highest-signal item as FEATURED. Write 3-4 QUICK items from remaining signals.
-SOURCE REJECT: Never attribute a NEWS item to 'Sovereign Intelligence Brief', 'this system', or any self-reference. If the RSS signal feed contains no external signals, output exactly: NO EXTERNAL SIGNALS — RSS RETURNED EMPTY — and stop. Do not generate synthetic news from your own prior output.
-SOURCE RULE:
-- SOURCE must name an external publication, data release, named analyst, or RSS feed.
-- "Chronicle" is NOT a valid source. Chronicle is an internal synthesis layer, not external intelligence.
-- If no external signal exists, write: SOURCE: NO EXTERNAL SIGNAL — [one-line internal observation]
-- Do not fabricate causal chains from internal synthesis.
-SCAN: 1-2 sentences per signal category. Lead with sharpest insight.
-LEVELS: 2-3 structurally significant price levels. Exact prices, one sentence each on why the level matters.
-SYNTHESIS: Six labeled fields in this exact order — no prose outside these fields:
-CONFLUENCE: [one sentence — what 3+ watched tickers are collectively signaling]
-ROTATION: [top mover] leading | [lagging name] lagging | theme: [one phrase]
-ASYMMETRIC SETUP: [ticker] — [condition] at [specific $ price level] — [LONG/SHORT bias only — no entry or stop]
-POSTURE DERIVATION: [condition A] + [condition B] → [posture word]
-POSTURE: [Hold / Watch / Opportunity]
-SETUP SIGNAL: Use exactly one of these three formats:
-  SETUP SIGNAL: [TICKER] [LONG/SHORT] — see Plays
-  SETUP SIGNAL: NO SETUP TODAY
-  SETUP SIGNAL: WATCH ONLY — [one-line reason]
-This field is REQUIRED. Do not omit it. Do not write a dash. No entry, stop, or target here.
-RULE — SYNTHESIS ORIGINALITY: Do not repeat any sentence from PULSE or DOMINANT NARRATIVE verbatim. Derive posture from convergence of REGIME, SCAN, and FORWARD 72H — do not restate earlier observations.
-FORWARD 72H
-Output EXACTLY three scenario blocks using the structure below. No prose outside the fields. No deviations. All six fields required per block.
-
-LIKELY:
-SCENARIO: [one sentence — most probable 72h outcome]
-PROBABILITY: [e.g. 60%]
-TRIGGER: [exact price level or event that confirms this scenario]
-PATH: [one sentence — how price gets there from current levels]
-EXPRESSION: [ticker] [LONG/SHORT] entry: [specific price level] | stop: [specific price level] | target: [specific price level] | size: [HIGH/MED/LOW] — or if levels cannot be derived AND SCAN shows no AT S / AT R flag: NO TRADE — INSUFFICIENT SETUP. Watch for [specific condition] at [specific price level].
-REJECT: NO TRADE on LIKELY when SCAN shows any ticker flagged AT S or AT R. Derive entry, stop, and target from the flagged level. A LIKELY NO TRADE when structural flags exist is a generation failure.
-MOST LIKELY EXPRESSION RULE:
-- If a trade is available: entry + stop + target required.
-- If NO TRADE: state the specific blocking condition.
-  Format: NO TRADE — [REASON]
-  Valid reasons: SETUP SCORE BELOW THRESHOLD | R/R BELOW MINIMUM | NO STRUCTURAL LEVEL AVAILABLE | POSTURE CONFLICT
-- Bare "NO TRADE — INSUFFICIENT SETUP" with no reason will FAIL the critic.
-INVALIDATION: [exact price or event that kills this scenario]
-
-BULL:
-SCENARIO: [one sentence — upside case]
-PROBABILITY: [e.g. 25%]
-TRIGGER: [exact price level or event]
-PATH: [one sentence]
-EXPRESSION: [ticker] [LONG/SHORT] entry: [specific price level] | stop: [specific price level] | target: [specific price level] | size: [HIGH/MED/LOW] — or NO TRADE — INSUFFICIENT SETUP
-INVALIDATION: [exact price or event]
-
-BEAR:
-SCENARIO: [one sentence — downside case]
-PROBABILITY: [e.g. 15%]
-TRIGGER: [exact price level or event]
-PATH: [one sentence]
-EXPRESSION: [ticker] SHORT entry: [specific price level] | stop: [specific price level] | target: [specific price level] | size: [HIGH/MED/LOW] — or NO TRADE — INSUFFICIENT SETUP — or defensive MACRO expression only. A LONG inside BEAR is structurally invalid.
-INVALIDATION: [exact price or event]
-
-Final line: one word only — Hold, Watch, or Opportunity
-PORTFOLIO WATCH
-3-4 sentences. RAG-backed portfolio thesis validation only — no execution parameters.
-1. AI ENERGY NEXUS: Is the thesis (VST, CEG, VRT, NNE, SMR) confirming or cracking?
-2. ROTATION: Any sector rotation signal that supports or undermines the thesis?
-3. BTC ACCUMULATION: Are accumulation conditions improving or deteriorating?
-Name specific tickers and levels. Do not repeat PULSE or REGIME.
-QUALITY ENFORCEMENT RULES
-
-1. SELF-CITATION REJECT: NEWS items must trace to external RSS signals only. Any item attributed to 'Sovereign Intelligence Brief', 'this system', or any self-reference is invalid. Replace with the next available external signal or output: NO EXTERNAL SIGNALS — RSS RETURNED EMPTY.
-
-2. COMPLETE SETUPS ONLY: Every EXPRESSION field must include entry, stop, AND target. Entry + stop with no target is an incomplete setup — output NO TRADE — INSUFFICIENT SETUP instead.
-
-3. NO VAGUE GEOPOLITICAL FILLER: NEWS items referencing China/Taiwan/Russia/Ukraine/OPEC must state a direct consequence to a specific watched ticker or price level. Geopolitical color with no market linkage is omitted.
-
-4. LARGE MOVER VERDICT REQUIRED: Any equity flagged >3% in SCAN must receive an explicit LONG, SHORT, or AVOID verdict with one-line rationale. Silent pass-through of large movers is a generation failure.
-
-5. FORWARD-LOOKING TRIGGERS ONLY: TRIGGER fields must describe future conditions that would confirm the scenario. Past-tense or already-observed conditions are invalid as triggers.
-
-6. POSTURE UPGRADE CONDITION: POSTURE may only upgrade (Hold → Watch → Opportunity) when FORWARD 72H LIKELY EXPRESSION contains a fully executable trade with entry, stop, and target. A NO TRADE LIKELY scenario cannot support Watch or Opportunity posture.
-
-7. TRENDING ASSETS ABOVE MA20: Any watched ticker trading above its MA20 with positive SCAN alignment must appear in SYNTHESIS or FORWARD 72H. Omitting a trending aligned ticker is a generation failure."""
+Each section's exact format and rules are specified inline with the data below — follow the inline spec for every section."""
 
 # Load lore context via core.lore — single access point for all universes
 _lore_ctx     = load_universe_context(_config)
@@ -250,7 +158,22 @@ SECTION V — CREATIVE LAB: THE SOVEREIGN SPARK:
 
 CODEX ENTRY: Only generate if signals include a confirmed security breach, major AI release,
 significant geopolitical shock, or major regulatory action.
-If threshold not met: complete silence. No placeholder text. No explanation."""
+If threshold not met: complete silence. No placeholder text. No explanation.
+
+ANTI-PATTERN BLOCK — these are generation failures, not stylistic choices:
+- NEVER open CHARACTER ACTIVITY with a character kneeling, crouching, or examining ruins
+- NEVER open CHARACTER ACTIVITY with "[Name] knelt amidst the [rubble/debris/remains]" or any variant
+- NEVER set the opening scene in an abandoned structure with dust and glyphs unless LAST_CHARACTER_SCENE explicitly calls for it
+- NEVER default to Rienne as the lead character two dispatches in a row
+- Scene variety is mandatory: firefight, extraction, infiltration, confrontation, transit under fire, tense standoff — rotate
+- The CHARACTER ACTIVITY opening line must place the character in motion, conflict, or a decision — not examination or reflection
+
+CHARACTER ROTATION RULE:
+- LAST_CHARACTER will be injected into the prompt. That character CANNOT lead CHARACTER ACTIVITY this dispatch.
+- If LAST_CHARACTER is Rienne → lead with Bohr or Sable
+- If LAST_CHARACTER is Bohr → lead with Rienne or Sable
+- If LAST_CHARACTER is Sable → lead with Rienne or Bohr
+- This rule has no exceptions."""
 
 CRITIC_PROMPT = """You are a factual consistency auditor reviewing a market intelligence brief.
 You will receive RAW DATA and a GENERATED BRIEF. Evaluate each checklist item as PASS or FAIL.
@@ -391,7 +314,7 @@ def render_section_ii_scaffold(context: dict) -> str:
         items = structured.get(key, [])
         if not items:
             return "  • No fresh signals."
-        return "\n".join(f"  • {h['headline']}" for h in items[:3])
+        return "\n".join(f"  • {h['headline']} [{h.get('source', 'unknown source')}]" for h in items[:3])
 
     return f"""SECTION II — SIGNAL FEED
 
@@ -528,21 +451,33 @@ def build_prompt_a(context: dict) -> str:
         "Assigning SPY's price to VST (or any cross-ticker substitution) is a hallucination and will be rejected."
     )
 
-    # --- Portfolio Watch RAG pull (top_k=3, foundational_research) ---
+    # --- Portfolio Watch RAG pull (top_k=5, foundational_research) ---
+    # Fetch n=5, filter junk chunks (< 100 chars = page headers / chart labels),
+    # then take best 3 survivors. Fallback instruction if all chunks are junk.
     portfolio_watch_rag = ""
     if _RAG_AVAILABLE:
         try:
             _pw_results = _rag_retrieve(
                 "AI energy nuclear bitcoin accumulation institutional thesis sector rotation",
-                n=3,
+                n=5,
                 doc_type="foundational_research"
             )
-            _pw_chunks = [r["text"] for r in _pw_results if r.get("distance", 1.0) <= 0.62]
+            _pw_chunks = [
+                r["text"] for r in _pw_results
+                if r.get("distance", 1.0) <= 0.62 and len(r.get("text", "")) >= 100
+            ]
             if _pw_chunks:
                 portfolio_watch_rag = (
                     "PORTFOLIO WATCH RESEARCH (institutional analysis):\n"
                     + "\n---\n".join(c[:500] for c in _pw_chunks[:3])
                 )
+                print(f"[strategist] Portfolio Watch RAG: {len(_pw_chunks)} usable chunks injected")
+            else:
+                portfolio_watch_rag = (
+                    "PORTFOLIO WATCH RESEARCH: No high-signal institutional chunks available today.\n"
+                    "Ground PORTFOLIO WATCH in today's price action and sector signals instead."
+                )
+                print("[strategist] Portfolio Watch RAG: no usable chunks — fallback instruction injected")
         except Exception as _e:
             print(f"\u26a0 [STRATEGIST] Portfolio Watch RAG unavailable: {_e}")
 
@@ -577,7 +512,7 @@ Using ONLY the data above, write the following five sections.
 No filler. No hedging. No sign-offs. Each section earns its place.
 
 PULSE
-4-5 sentences. How does the market feel RIGHT NOW as a system? Integrate BTC, SPY, Gold/DXY signals, Fear & Greed, and any flagged equities or sectors into a single coherent read. Cover what is leading, what is lagging, what is diverging, and what the net read means for positioning today. If CATALYST CALENDAR shows any FOMC, CPI, or earnings event within 7 days, name it by event type and days-away count, and state explicitly whether it creates a risk-on or risk-off bias for the current setup. No bullet points.
+4-5 sentences. Cross-asset inference only — do NOT restate or paraphrase headlines from the NEWS feed. Instead, derive what the relationship between assets is telling you: what is BTC doing relative to SPY? What is Gold/DXY signaling about dollar risk appetite? Is Fear & Greed confirming or diverging from price action? Name what is leading, what is lagging, and what the divergence implies for positioning. End with one explicit net verdict: risk-on, risk-off, or mixed — and why. If CATALYST CALENDAR shows any FOMC, CPI, or earnings event within 7 days, name it by event type and days-away count, and state whether it creates a risk-on or risk-off bias. No bullet points. No headline restatement.
 
 REGIME
 4-5 sentences. What macro regime are we in? What is driving it? What would change it? How does this regime specifically affect BTC, AI semis, and AI energy names? Reference macro signals and chronicle thread. If YESTERDAY DELTA is present, explicitly address whether yesterday's posture still holds or has shifted — and why.
@@ -637,23 +572,41 @@ RULES:
 - SYNTHESIS ORIGINALITY: Do not repeat any sentence from PULSE or DOMINANT NARRATIVE verbatim. SYNTHESIS derives posture from convergence — it does not restate observations already in PULSE or DOMINANT NARRATIVE.
 - SETUP SIGNAL: Use exactly one of the three valid formats. No entry, stop, target, R/R, or score.
 
-PRICE ANCHOR REMINDER — use ONLY these levels for all EXPRESSION, TRIGGER, and INVALIDATION fields:
-{price_anchor}
-Any price level outside 20% of the anchors above (40% for BTC/ETH/SOL) is a hallucination — do not write it.
+PRICE ANCHOR REMINDER: Use ONLY the CURRENT PRICE ANCHORS listed near the top of this brief for every EXPRESSION, TRIGGER, and INVALIDATION level. Any level outside 20% of those anchors (40% for BTC/ETH/SOL) is a hallucination — do not write it.
 PORTFOLIO WATCH PRICE RULE: When mentioning VST, CEG, VRT, NNE, SMR, WATT prices in PORTFOLIO WATCH, you MUST use the anchored prices above. Do not invent or recall prices from memory — the anchors are the only valid source. A price not in the anchor list must not appear in PORTFOLIO WATCH.
 
-SYNTHESIS REMINDER — output ALL SIX fields before moving to FORWARD 72H:
-CONFLUENCE: [3+ tickers + collective signal]
-ROTATION: [top mover] leading | [lagging] lagging | theme: [phrase]
-ASYMMETRIC SETUP: [ticker] — [condition] at [$level] — [LONG/SHORT bias]
-{synth_price_table}
-POSTURE DERIVATION: [condition A] + [condition B] → [posture word]
-POSTURE: [Hold / Watch / Opportunity]
-SETUP SIGNAL: [TICKER LONG/SHORT — see Plays] OR [NO SETUP TODAY] OR [WATCH ONLY — reason]
-All six fields required. Missing any one field is a generation failure.
-
 FORWARD 72H
-Write exactly three scenario blocks. Probabilities must sum to 100. Use this exact format for each block — no deviation:
+Write exactly three scenario blocks. Probabilities must sum to 100. Use this exact format for each block — no deviation.
+
+EXAMPLE OF CORRECT OUTPUT (use this structure exactly — substitute real values):
+
+LIKELY:
+SCENARIO: BTC consolidates above $62,000 support before resuming upward trend toward $67,000 resistance.
+PROBABILITY: 60%
+TRIGGER: BTC holds $62,000 on next hourly close with volume above 20-bar average.
+PATH: Price coils between $62,000 and $64,000 for 24-48h, then breaks higher into the $66,500-$67,000 resistance zone. Positioning into the break with reduced size is appropriate given Extreme Fear.
+EXPRESSION: BTC LONG entry: $62,500 | stop: $60,800 | target: $66,800 | size: MED
+INVALIDATION: Daily close below $60,800 signals trend failure and opens $57,000.
+
+BULL:
+SCENARIO: BTC breaks above $65,000 on macro catalyst, accelerating toward $70,000.
+PROBABILITY: 25%
+TRIGGER: BTC closes daily candle above $65,000 with Fear & Greed recovering above 25.
+PATH: A macro risk-on catalyst (Fed pause signal or ETF inflow print) triggers a momentum move through $65,000. $70,000 becomes the natural magnet with minimal structural resistance between.
+EXPRESSION: BTC LONG entry: $65,200 | stop: $63,500 | target: $70,000 | size: HIGH
+INVALIDATION: Failure to hold $65,000 on retest — close back below invalidates the breakout.
+
+BEAR:
+SCENARIO: BTC loses $62,000 support and drops to $57,000 demand zone.
+PROBABILITY: 15%
+TRIGGER: Daily close below $62,000 with accelerating volume.
+PATH: Support failure triggers stop cascade to $59,500, then $57,000. Extreme Fear deepens and no macro catalyst present to absorb selling pressure.
+EXPRESSION: BTC SHORT entry: $61,800 | stop: $63,200 | target: $57,200 | size: LOW
+INVALIDATION: Reclaim of $63,500 on daily close — shorts cover and long bias resumes.
+
+Hold
+
+END OF EXAMPLE — now write the actual FORWARD 72H using real market data from this brief:
 
 LIKELY:
 SCENARIO: [one sentence — what most probably happens]
@@ -720,6 +673,19 @@ def build_prompt_b(context: dict) -> str:
     lore_continuity = context.get("lore_continuity", "No persistent lore state available.")
     timestamp = context.get("timestamp", "unknown")
 
+    # Derive last character lead from lore state — enforce rotation
+    _lore_st = context.get("lore_state", {})
+    _char_updates = _lore_st.get("character_updates", {})
+    _last_char = "Unknown"
+    _last_ts = ""
+    for char, data in _char_updates.items():
+        if isinstance(data, dict):
+            ts = data.get("last_updated", "")
+            if ts > _last_ts:
+                _last_ts = ts
+                _last_char = char
+    last_character_block = f"LAST_CHARACTER: {_last_char} — this character CANNOT lead CHARACTER ACTIVITY this dispatch. Rotate to a different cast member." 
+
     # Extract signal energy as abstract inspiration — no tickers
     structured = context.get("signals", {}).get("structured", {})
     def signal_energy(key):
@@ -752,6 +718,8 @@ ESTABLISHED LORE CONTEXT — reference only, do not reproduce verbatim:
 {lore_continuity}
 
 ---
+
+{last_character_block}
 
 SECTION IV — {_active_universe.upper()}
 
@@ -829,7 +797,7 @@ def critic_review(prompt: str, brief: str) -> dict:
 def generate_stream_a(context: dict) -> tuple[str, dict, str]:
     """Generate market intel brief. Returns (full_brief, review, model_used)."""
     prompt = build_prompt_a(context)
-    result, model_used = query_with_fallback(prompt, SYSTEM_PROMPT_A, "STREAM-A")
+    result, model_used = query_with_fallback(prompt, SYSTEM_PROMPT_A, "STREAM-A", num_ctx=12288)
 
     # Prepend pre-rendered sections
     section_i = render_section_i(context)
@@ -919,16 +887,25 @@ def write_stream_a(brief: str, review: dict, model_used: str, context: dict, tim
             posture_word = line.strip()
             break
 
-    # Thread posture word back into context.json so gates can read it
-    if posture_word:
+    # Thread posture + directional bias back into context.json (Plays consumes downstream)
+    _bias = {"posture": posture_word or "", "primary": None, "setup_signal": ""}
+    _m = re.search(r'LIKELY:.*?EXPRESSION:\s*([A-Z]{2,6})\s+(LONG|SHORT)', brief, re.DOTALL)
+    if _m:
+        _bias["primary"] = {"ticker": _m.group(1), "direction": _m.group(2)}
+    _ss = re.search(r'SETUP SIGNAL:\s*([^\n]+)', brief)
+    if _ss:
+        _bias["setup_signal"] = _ss.group(1).strip()
+    if posture_word or _bias["primary"]:
         try:
             with open(CONTEXT_FILE, "r") as _f:
                 _ctx = json.load(_f)
             _ctx["daily_posture"] = posture_word
+            _ctx["directional_bias"] = _bias
             with open(CONTEXT_FILE, "w") as _f:
                 json.dump(_ctx, _f, indent=2)
+            print(f"  \u21b3 [STRATEGIST] bias emitted: {_bias['primary']} | posture {posture_word}")
         except Exception as _e:
-            print(f"⚠ [STRATEGIST] posture write failed: {_e}")
+            print(f"\u26a0 [STRATEGIST] bias write failed: {_e}")
 
     output = f"""---
 date: {timestamp.strftime('%Y-%m-%d')}

@@ -21,7 +21,8 @@ def generate(prompt: str, system: str,
              temperature: float = OLLAMA_TEMP_DEFAULT,
              json_mode: bool = False,
              model: str = MODEL,
-             retries: int = 2) -> str:
+             retries: int = 2,
+             num_ctx: int = 8192) -> str:
     """Call Ollama /api/generate. Returns the raw response string.
 
     json_mode=True passes format='json' to Ollama, which constrains output
@@ -33,7 +34,7 @@ def generate(prompt: str, system: str,
         "system": system,
         "prompt": prompt,
         "stream": False,
-        "options": {"temperature": temperature, "num_predict": max_tokens},
+        "options": {"temperature": temperature, "num_predict": max_tokens, "num_ctx": num_ctx},
         "keep_alive": "0",
     }
     if json_mode:
@@ -117,6 +118,7 @@ def query_with_fallback(
     temperature: float = OLLAMA_TEMP_DEFAULT,
     max_tokens: int = 2000,
     timeout: int = 300,
+    num_ctx: int = 8192,
 ) -> tuple[str, str]:
     """
     Query with gemma3:12b primary, mistral:7b fallback.
@@ -131,7 +133,8 @@ def query_with_fallback(
             result = generate(prompt, system=system,
                               max_tokens=max_tokens,
                               temperature=temperature,
-                              model=model)
+                              model=model,
+                              num_ctx=num_ctx)
             print(f"✅ [{label}] Complete via {model}")
             return result, model
         except Exception as e:

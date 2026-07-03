@@ -698,12 +698,13 @@ def fetch_signals(max_per_category: int = 3) -> dict:
         category_signals = []
         for feed_url in feeds:
             try:
-                feed = feedparser.parse(
-                    feed_url,
-                    agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
-                          'AppleWebKit/537.36 (KHTML, like Gecko) '
-                          'Chrome/120.0.0.0 Safari/537.36'
-                )
+                try:
+                    _resp = requests.get(feed_url, headers=HEADERS, timeout=12)
+                    _resp.raise_for_status()
+                    feed = feedparser.parse(_resp.content)
+                except Exception as _fetch_err:
+                    print(f"    ⚠️  Feed timeout/error ({feed_url[:40]}...): {_fetch_err}")
+                    continue
                 for entry in feed.entries[:10]:
                     title = entry.get("title", "").strip()
                     link = entry.get("link", "")

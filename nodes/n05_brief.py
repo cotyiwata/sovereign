@@ -812,10 +812,16 @@ def run_critic_gate(fm, sections, ctx):
         _scan_text = fwd + "\n" + synth + "\n" + sections.get("levels", "")
         for _line in _scan_text.split("\n"):
             _lu = _line.upper()
+            # Skip lines with multiple tickers — cross-ticker numbers cause false fails
+            _tickers_on_line = [_t for _t in _ctx_px if re.search(r'\b' + _t + r'\b', _lu)]
+            if len(_tickers_on_line) > 1:
+                continue
+            # Normalize index names to prevent "500" in "S&P 500" parsing as price
+            _line_norm = re.sub(r'S&P\s*500', 'SP500INDEX', _line, flags=re.IGNORECASE)
             for _t, _actual in _ctx_px.items():
-                if _t in _lu:
+                if re.search(r'\b' + _t + r'\b', _lu):
                     # Strip commas before scanning — prevents 77,357 splitting into 357
-                    _stripped = _line.replace(",", "")
+                    _stripped = _line_norm.replace(",", "")
                     for _n in re.findall(r'\b(\d{3,}(?:\.\d+)?)\b', _stripped):
                         _val = float(_n)
                         _thresh = PRICE_SANITY_THRESHOLD_CRYPTO if _t in CRYPTO_TICKERS else PRICE_SANITY_THRESHOLD_EQUITY

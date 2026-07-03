@@ -689,8 +689,72 @@ def fetch_global_market_meta() -> dict:
 
 # ── SIGNAL FEEDS ───────────────────────────────────────────────────────────────
 
+def classify_signal_batch(category: str, items: list) -> list:
+    """
+    Second-stage semantic triage via mistral:7b.
+    Runs AFTER the keyword gate — items already passed RELEVANCE_KEYWORDS.
+    Judges each headline into one of three tiers:
+      relevant_interesting   — material to a trading decision today
+      relevant_uninteresting — on-topic but routine/low-signal
+      irrelevant              — keyword match was a false positive, drop it
+    Fails closed: any error keeps every item as 'relevant_uninteresting'
+    (never drops signal on a triage failure).
+    """
+    if not items:
+        return items
+
+    from core.llm import generate
+    from core.constants import MODEL_FALLBACK, OLLAMA_TEMP_STRICT
+
+    n = len(items)
+    headlines_block = "\n".join(f"{i+1}. {it['headline']}" for i, it in enumerate(items))
+    system = (
+        "You are a financial signal triage classifier for an active trader "
+        "watching BTC, ETH, SOL, TSLA, NVDA, and the AI/energy/semis sector. "
+        f"You will be given {n} numbered headlines. "
+        f"Respond with EXACTLY {n} lines, one per headline, in the same order, "
+        "and nothing else — no numbering, no headline text, no explanation, no JSON. "
+        "Each line must be exactly one word from this list: "
+        "RELEVANT_INTERESTING (material to a trading decision today), "
+        "RELEVANT_UNINTERESTING (on-topic but routine/low-signal), "
+        "IRRELEVANT (the keyword match was a false positive)."
+    )
+    prompt = f"Category: {category}\n\nHeadlines:\n{headlines_block}"
+
+    _VALID_TIERS = ("RELEVANT_INTERESTING", "RELEVANT_UNINTERESTING", "IRRELEVANT")
+    tiers = [None] * n
+    try:
+        raw = generate(prompt, system=system, model=MODEL_FALLBACK,
+                        temperature=OLLAMA_TEMP_STRICT,
+                        max_tokens=400, num_ctx=4096)
+        lines = [l.strip() for l in raw.strip().splitlines() if l.strip()]
+        extracted = []
+        for line in lines:
+            upper = line.upper()
+            hit = next((v for v in _VALID_TIERS if v in upper), None)
+            if hit:
+                extracted.append(hit)
+        if len(extracted) == n:
+            tiers = extracted
+        else:
+            print(f"    🩺 [{category}] Triage line-count mismatch "
+                  f"({len(extracted)} labels for {n} headlines) — keeping all, untiered")
+            print(f"    🩺 [{category}] Raw response (first 300 chars): {raw[:300]!r}")
+    except Exception as e:
+        print(f"    ⚠️  Triage classification failed ({category}): {e} — keeping all, untiered")
+
+    for i, it in enumerate(items):
+        it["tier"] = (tiers[i] or "RELEVANT_UNINTERESTING").lower()
+
+    dropped = sum(1 for it in items if it["tier"] == "irrelevant")
+    if dropped:
+        print(f"    🔎 [{category}] Triage dropped {dropped} false-positive keyword match(es)")
+
+    return [it for it in items if it["tier"] != "irrelevant"]
+
+
 def fetch_signals(max_per_category: int = 3) -> dict:
-    """Harvest RSS feeds with keyword relevance filter."""
+    """Harvest RSS feeds with keyword relevance filter + mistral:7b semantic triage."""
     print("  📡 Harvesting signal feeds...")
     signals = {}
 
@@ -750,6 +814,11 @@ def fetch_signals(max_per_category: int = 3) -> dict:
             if item["headline"] not in seen:
                 seen.add(item["headline"])
                 deduped.append(item)
+
+        # ── Semantic triage (mistral:7b) — 3-way judgment on keyword survivors ──
+        deduped = classify_signal_batch(category, deduped)
+        _TIER_PRIORITY = {"relevant_interesting": 0, "relevant_uninteresting": 1}
+        deduped.sort(key=lambda it: _TIER_PRIORITY.get(it.get("tier"), 1))
 
         signals[category] = deduped[:max_per_category * 2]
         _surviving = len(signals[category])
